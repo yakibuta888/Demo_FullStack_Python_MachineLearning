@@ -1,8 +1,8 @@
 {
-  "name": "Python Project",
+  "name": "Python_Project",
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
   "service": "app",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/home/pyclient/workspace",
   "customizations": {
     "vscode": {
       "settings": {
@@ -104,5 +104,6 @@
       ]
     }
   },
+  "remoteUser": "pyclient",
   "postCreateCommand": "pip install -r env/requirements.txt"
 }

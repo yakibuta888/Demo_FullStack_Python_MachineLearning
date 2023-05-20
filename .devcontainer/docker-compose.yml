@@ -4,9 +4,9 @@ services:
   app:
     command: sleep infinity
     volumes:
-      - .:/workspace:cached
-      - pip-volume:/workspace/vendor
-      - vscode-extension-volume:/root/.vscode-server/extensions
+      - .:$WORK_DIR:cached
+      - pip-volume:$WORK_DIR/vendor
+      - vscode-extension-volume:$HOME_DIR/.vscode-server/extensions
 
 volumes:
   pip-volume:
