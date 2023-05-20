@@ -1,8 +1,0 @@
-{
-  "terminal.integrated.env.windows": {
-      "DEVCONTAINER_USERNAME": "${workspaceFolder}/.env"
-  },
-  "docker.environment": {
-    "TESTENV": "test_env"
-  },
-}
