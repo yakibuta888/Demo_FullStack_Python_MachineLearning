@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4.1
 FROM python:3.11-slim
 
 RUN apt-get update \
@@ -5,7 +6,7 @@ RUN apt-get update \
 	apt-utils \
 	gcc \
 	build-essential \
-	gosu \
+	sudo \
 	# clean up
 	&& apt-get autoremove -y \
 	&& apt-get clean -y \
@@ -26,7 +27,15 @@ RUN pip install --upgrade pip;\
 	pytest
 
 # Create the user
-COPY ./docker/app/createuser.sh /usr/bin/createuser.sh
-RUN chmod +x /usr/bin/createuser.sh
-ENTRYPOINT ["/usr/bin/createuser.sh"]
-CMD ["/bin/bash"]
+ARG USERNAME
+ARG HOMEDIR
+ARG USERID
+ARG GROUPID
+RUN <<-EOF
+	echo "Create User = ${USERID}. Group = ${GROUPID}"
+	groupadd -g ${GROUPID} ${USERNAME}
+	useradd -m -s /bin/bash -d ${HOMEDIR} -k /etc/skel -u ${USERID} -g ${GROUPID} ${USERNAME}
+	echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME}
+	chmod 0440 /etc/sudoers.d/${USERNAME}
+EOF
+USER ${USERNAME}

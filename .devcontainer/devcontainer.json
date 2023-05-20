@@ -1,6 +1,6 @@
 {
   "name": "Python_Project",
-  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
   "service": "app",
   "workspaceFolder": "/home/pyclient/workspace",
   "customizations": {
@@ -94,7 +94,10 @@
           }
         },
         "autoDocstring.docstringFormat": "numpy",
-        "autoDocstring.startOnNewLine": true
+        "autoDocstring.startOnNewLine": true,
+        "terminal.integrated.env.windows": {
+          "USER_NAME": "${env:USER_NAME}"
+        }
       },
       "extensions": [
         "ms-python.python",
@@ -104,6 +107,14 @@
       ]
     }
   },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "remoteEnv": {
+    "TESTNAME": "os:${localEnv:OS}\\nlocalname:${localEnv:USER_NAME}\\nctestenv:${containerEnv:TESTENV}\\ncuser:${containerEnv:USER_NAME}\\ndevuser:${env:USER_NAME}"
+  },
   "remoteUser": "pyclient",
-  "postCreateCommand": "pip install -r env/requirements.txt"
+  // "remoteUser": "${USER_NAME}",
+  // "postCreateCommand": "pip install -r env/requirements.txt"
+  "postCreateCommand": "echo ${TESTNAME} > ~/workspace/test.txt ; printenv > ~/workspace/show_env.txt"
 }

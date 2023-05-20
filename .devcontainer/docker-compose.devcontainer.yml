@@ -2,11 +2,15 @@ version: '3'
 
 services:
   app:
-    command: sleep infinity
     volumes:
       - .:$WORK_DIR:cached
       - pip-volume:$WORK_DIR/vendor
       - vscode-extension-volume:$HOME_DIR/.vscode-server/extensions
+    user: $USER_ID:$GROUP_ID
+    entrypoint:
+      - bash
+      - ./.devcontainer/devcontainer-entrypoint.sh
+    command: sleep infinity
 
 volumes:
   pip-volume:

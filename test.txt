@@ -1,0 +1,5 @@
+os:Windows_NT
+localname:
+ctestenv:
+cuser:pyclient
+devuser:
