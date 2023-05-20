@@ -1,1 +1,1 @@
-# Demo_FullStack_Python_MachineLearning
+# Python development templates using VSCode and DockerCompose
