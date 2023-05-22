@@ -1,0 +1,6 @@
+{
+  "python.analysis.extraPaths": [
+    "/home/pyclient/workspace/src",
+    "/home/pyclient/workspace/src/app/models",
+  ]
+}

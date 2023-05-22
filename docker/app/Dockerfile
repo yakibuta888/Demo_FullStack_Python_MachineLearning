@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4.1
-FROM python:3.11-slim
+FROM python:3.10-slim
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -7,6 +7,7 @@ RUN apt-get update \
 	gcc \
 	build-essential \
 	sudo \
+	sqlite3 \
 	# clean up
 	&& apt-get autoremove -y \
 	&& apt-get clean -y \

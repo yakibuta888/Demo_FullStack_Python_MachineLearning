@@ -1,5 +1,5 @@
 {
-  "name": "Python_Project",
+  "name": "Demo_FullStack_Python_ML",
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
   "service": "app",
   "workspaceFolder": "/home/pyclient/workspace",
@@ -43,6 +43,10 @@
           "reportInvalidStringEscapeSequence": "information",
           "reportTypedDictNotRequiredAccess":"warning"
         },
+        "python.analysis.extraPaths": [
+          "/home/pyclient/workspace/src",
+          "/home/pyclient/workspace/src/app/models"
+        ],
         // todo-tree settings
         "todo-tree.general.tags": [
           "FIXME",
