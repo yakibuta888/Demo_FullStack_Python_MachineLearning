@@ -3,7 +3,7 @@ from flask import Flask, redirect, render_template, request, url_for
 import settings
 
 
-app = Flask(__name__, template_folder=settings.TEMPLATE_FOLDER_PATH)
+app = Flask(__name__, template_folder=settings.TEMPLATE_FOLDER_PATH, static_folder=settings.STATIC_FOLDER_PATH)
 
 
 class WebServer(object):
