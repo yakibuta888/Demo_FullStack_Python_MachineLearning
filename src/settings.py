@@ -10,3 +10,4 @@ TEMPLATE_FOLDER_PATH: str = os.path.normpath(os.path.join(cwd, 'templates'))
 STATIC_FOLDER_PATH: str = os.path.normpath(os.path.join(cwd, 'static'))
 PORT: int = 5000
 DEBUG: bool = True
+RECOMMEND_ENGINE_ENABLE = True

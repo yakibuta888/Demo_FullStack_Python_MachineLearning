@@ -101,11 +101,12 @@
         "autoDocstring.startOnNewLine": true
       },
       "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "Gruntfuggly.todo-tree",
-        "njpwerner.autodocstring"
-      ]
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"Gruntfuggly.todo-tree",
+		"njpwerner.autodocstring",
+		"Asuka.insertnumbers"
+	]
     }
   },
   "features": {
