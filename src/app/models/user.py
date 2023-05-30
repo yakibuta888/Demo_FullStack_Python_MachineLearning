@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm.session import Session
 
 from app.models.db import BaseDatabase, database
 
@@ -8,7 +9,7 @@ class User(BaseDatabase):
     name: Mapped[str] = mapped_column(unique=True)
 
     @staticmethod
-    def get_or_create(name: str) -> "User":
+    def get_or_create(name: str) -> Session:
         session = database.connect_db()
         row = session.query(User).filter(User.name == name).first()
         if row:

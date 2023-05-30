@@ -9,10 +9,10 @@ logger = logging.getLogger(__name__)
 if __name__ == "__main__":
     logger.info("running server")
 
-    from app.models.user import User
     from app.models.db import database
-    from app.models.restaurant import Restaurant
     from app.models.rate import Rate
+    from app.models.restaurant import Restaurant
+    from app.models.user import User
 
     session = database.connect_db()
 

@@ -1,13 +1,16 @@
 from flask import Flask, redirect, render_template, request, url_for
 
-from app.controllers.forms import RateForm, YesOrNoForm
-from app.models.user import User
-from app.models.restaurant import Restaurant
-from app.models.rate import Rate
 import settings
+from app.controllers.forms import RateForm, YesOrNoForm
+from app.models.rate import Rate
+from app.models.restaurant import Restaurant
+from app.models.user import User
 
-
-app = Flask(__name__, template_folder=settings.TEMPLATE_FOLDER_PATH, static_folder=settings.STATIC_FOLDER_PATH)
+app = Flask(
+    __name__,
+    template_folder=settings.TEMPLATE_FOLDER_PATH,
+    static_folder=settings.STATIC_FOLDER_PATH,
+)
 
 
 class WebServer(object):
@@ -17,7 +20,7 @@ class WebServer(object):
 
 server: WebServer = WebServer()
 
-ROBOT_NAME: str = 'Roboko'
+ROBOT_NAME: str = "Roboko"
 
 
 def get_form2string(value: str) -> str:
@@ -38,17 +41,24 @@ def hello() -> str:
         if restaurants:
             form = YesOrNoForm(request.form)
             form.user_name.data = user_name
-            return render_template("recommend_restaurant.html", user_name=user_name, restaurants=restaurants, form=form)
+            return render_template(
+                "recommend_restaurant.html",
+                user_name=user_name,
+                restaurants=restaurants,
+                form=form,
+            )
 
         form = RateForm(request.form)
         form.user_name.data = user_name
-        return render_template("evaluate_restaurant.html", user_name=user_name, form=form)
+        return render_template(
+            "evaluate_restaurant.html", user_name=user_name, form=form
+        )
 
     return render_template("hello.html", name=ROBOT_NAME)
 
 
 @app.route("/restaurant/evaluate/status", methods=["GET", "POST"])
-def evaluate_yes_or_no():
+def evaluate_yes_or_no() -> "str | Response":
     if request.method == "POST":
         form = YesOrNoForm(request.form)
         user_name: str = form.user_name.data.strip()
@@ -57,11 +67,14 @@ def evaluate_yes_or_no():
 
         form = RateForm(request.form)
         form.user_name.data = user_name
-        return render_template("evaluate_restaurant.html", user_name=user_name, form=form)
+        return render_template(
+            "evaluate_restaurant.html", user_name=user_name, form=form
+        )
+    return redirect(url_for("hello"))
 
 
 @app.route("/restaurant/rate", methods=["GET", "POST"])
-def restaurant_rate():
+def restaurant_rate() -> "str | Response":
     form = RateForm(request.form)
     if request.method == "POST":
         user_name: str = form.user_name.data.strip()
@@ -74,3 +87,4 @@ def restaurant_rate():
         Rate.update_or_create(user, restaurant, value)
 
         return render_template("good_by.html", user_name=user_name)
+    return redirect(url_for("hello"))

@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm.session import Session
 
 from app.models.db import BaseDatabase, database
 
@@ -8,7 +9,7 @@ class Restaurant(BaseDatabase):
     name: Mapped[str] = mapped_column(unique=True)
 
     @staticmethod
-    def get(restaurant_id: int) -> "Restaurant | None":
+    def get(restaurant_id: int) -> Session | None:
         session = database.connect_db()
         row = session.query(Restaurant).filter(Restaurant.id == restaurant_id).first()
         session.close()
@@ -17,7 +18,7 @@ class Restaurant(BaseDatabase):
         return None
 
     @staticmethod
-    def get_or_create(name: str) -> "Restaurant":
+    def get_or_create(name: str) -> Session:
         session = database.connect_db()
         row = session.query(Restaurant).filter(Restaurant.name == name).first()
         if row:
